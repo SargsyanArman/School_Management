@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar } from '@mui/material';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../Constants/GeneralConstants';
 
 const AddSubject = ({ open, handleClose, onSuccess }) => {
     const [values, setValues] = useState({
@@ -21,7 +22,7 @@ const AddSubject = ({ open, handleClose, onSuccess }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const res = await axios.post('http://localhost:8081/subjects', values);
+            const res = await axios.post(`${API_BASE_URL}subjects`, values);
 
             if (res.data.status === "Success") {
                 setSnackbarMessage('Subject created successfully');

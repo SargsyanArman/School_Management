@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 import { handleChange, handleSubmit } from '../../../Constants/TeachersConstants';
+import { API_BASE_URL } from '../../../Constants/GeneralConstants';
 
 const AddTeacher = ({ open, handleClose, onSuccess }) => {
     const [values, setValues] = useState({
@@ -13,7 +14,7 @@ const AddTeacher = ({ open, handleClose, onSuccess }) => {
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
-                const response = await axios.get('http://localhost:8081/subjects');
+                const response = await axios.get(`${API_BASE_URL}subjects`);
                 setSubjects(response.data);
             } catch (err) {
                 console.log('Error fetching subjects:', err);

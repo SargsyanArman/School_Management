@@ -1,5 +1,6 @@
 import { styled, TableCell } from "@mui/material";
 import axios from "axios";
+import { API_BASE_URL } from "./GeneralConstants";
 
 // Styled component for table cells with custom styling
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -10,9 +11,6 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
         backgroundColor: theme.palette.primary.dark,
     },
 }));
-
-// Base API URL for pupil-related operations
-export const API_BASE_URL = 'http://localhost:8081/pupils';
 
 // Array of grade options from 1 to 10 for selection
 export const GRADE_OPTIONS = Array.from({ length: 10 }, (_, index) => ({
@@ -33,7 +31,7 @@ export const TABLE_HEADERS = [
 
 // Function to handle successful addition of subjects and re-fetch pupil data
 export const handleAddSubjectSuccess = async (setUsers) => {
-    const response = await axios.get(API_BASE_URL);
+    const response = await axios.get(`${API_BASE_URL}/pupils`);
     setUsers(response.data);
 };
 
@@ -57,11 +55,11 @@ export const handleEditClose = (setOpen, setSelectedUser) => {
 export const handleEditSave = async (selectedUser, setUsers, handleEditClose) => {
     if (!selectedUser) return;
     try {
-        await axios.put(`${API_BASE_URL}/${selectedUser.pupils_id}`, {
+        await axios.put(`${API_BASE_URL}/pupils/${selectedUser.pupils_id}`, {
             pupils_name: selectedUser.pupils_name,
             grades_id: selectedUser.grades_id,
         });
-        const response = await axios.get(API_BASE_URL);
+        const response = await axios.get(`${API_BASE_URL}/pupils`);
         setUsers(response.data);
         handleEditClose();
     } catch (err) {
@@ -72,7 +70,7 @@ export const handleEditSave = async (selectedUser, setUsers, handleEditClose) =>
 // Function to delete a pupil from the list and update state
 export const handleDelete = async (userId, users, setUsers) => {
     try {
-        await axios.delete(`${API_BASE_URL}/${userId}`);
+        await axios.delete(`${API_BASE_URL}pupils/${userId}`);
         setUsers(users.filter(user => user.pupils_id !== userId));
     } catch (err) {
         console.error('Error deleting user:', err);
@@ -90,7 +88,7 @@ export const handleChange = (values, setValues) => (event) => {
 // Function to handle form submission for creating a new pupil
 export const handleSubmit = async (values, setValues, handleClose, onSuccess) => {
     try {
-        const res = await axios.post(API_BASE_URL, values);
+        const res = await axios.post(`${API_BASE_URL}/pupils`, values);
         if (res.data.status === "Success") {
             setValues({ name: '', grade_id: 1 });
             handleClose();

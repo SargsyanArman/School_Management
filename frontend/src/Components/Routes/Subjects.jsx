@@ -19,6 +19,7 @@ import {
 } from '../../Constants/SubjectConstants';
 import UnauthorizedPage from './UnauthorizedPage';
 import { useSelector } from 'react-redux';
+import { API_BASE_URL } from '../../Constants/GeneralConstants';
 
 
 const Subjects = () => {
@@ -33,7 +34,7 @@ const Subjects = () => {
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
-                const response = await axios.get('http://localhost:8081/subjects');
+                const response = await axios.get(`${API_BASE_URL}subjects`);
                 setSubjects(response.data);
                 setLoading(false);
             } catch (err) {
