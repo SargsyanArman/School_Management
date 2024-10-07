@@ -4,7 +4,7 @@ import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button,
 } from '@mui/material';
 import { StyledTableCell, TABLE_HEADERS } from '../../../Constants/PupilsConstants';
-import { TABLE_ACTIONS, TABLE_STYLES } from '../../../Constants/TableConstants';
+import { TABLE_ACTIONS, TABLE_STYLES, ACTIONS } from '../../../Constants/TableConstants';
 
 const PupilsTable = ({ users, handleEditOpen, handleDelete, setUsers }) => {
     return (
@@ -21,7 +21,7 @@ const PupilsTable = ({ users, handleEditOpen, handleDelete, setUsers }) => {
                     {users.map((userDetails) => (
                         <TableRow key={userDetails.pupils_id} sx={TABLE_STYLES}>
                             {TABLE_HEADERS.map((header) => (
-                                header.key !== 'actions' ? (
+                                header.key !== ACTIONS ? (
                                     <TableCell key={header.key}>
                                         {userDetails[header.key]}
                                     </TableCell>

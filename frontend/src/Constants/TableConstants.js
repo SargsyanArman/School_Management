@@ -9,3 +9,5 @@ export const TABLE_ACTIONS = {
     EDIT: 'edit',
     DELETE: 'delete',
 };
+
+export const ACTIONS = 'actions'
