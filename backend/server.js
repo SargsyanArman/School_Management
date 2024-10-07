@@ -1,3 +1,6 @@
+// TODO: Add password hashing
+// TODO: SQL injection
+
 import express from 'express';
 import cors from 'cors';
 import adminsRoutes from './routes/adminRoutes.js';
