@@ -5,8 +5,9 @@ import axios from 'axios';
 import AddPupil from './Adding/AddPupil';
 import PupilEdit from './Tools/PupilEdit';
 import PupilsTable from './Tables/PupilTable';
-import { handleAddSubjectSuccess, handleEditOpen, handleEditClose, handleEditSave, handleDelete, API_BASE_URL } from '../../Constants/PupilsConstants';
+import { handleAddSubjectSuccess, handleEditOpen, handleEditClose, handleEditSave, handleDelete } from '../../Constants/PupilsConstants';
 import UnauthorizedPage from './UnauthorizedPage';
+import { API_BASE_URL } from '../../Constants/GeneralConstants';
 
 const Pupils = () => {
     const user = useSelector((state) => state.user);
@@ -28,7 +29,7 @@ const Pupils = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(API_BASE_URL);
+                const response = await axios.get(`${API_BASE_URL}/pupils`);
                 setUsers(response.data);
                 setLoading(false);
             } catch (err) {
