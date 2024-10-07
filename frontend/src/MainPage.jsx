@@ -1,7 +1,9 @@
 import React from 'react';
 import { Box, Typography, Button, Grid } from '@mui/material';
 import { TESTIMONIALS, FEATURES, FOOTER_BOX_STYLE } from './Constants/MainContent';
+import { useNavigate } from 'react-router-dom';
 const MainPage = () => {
+    const navigate = useNavigate()
     return (
         <Box>
             <Box
@@ -13,7 +15,7 @@ const MainPage = () => {
                 <Typography variant="h5" sx={{ zIndex: 2, mb: 4 }}>
                     Your trusted partner in education management
                 </Typography>
-                <Button variant="contained" sx={{ zIndex: 2 }} href="/subjects">
+                <Button variant="contained" sx={{ zIndex: 2 }} onClick={() => navigate('/subjects')}>
                     Get Started
                 </Button>
             </Box>
