@@ -3,30 +3,36 @@ import main from "../../images/main-background.jpg";
 export const FEATURES = [
     {
         title: "Efficient Management",
-        description: "Manage students, teachers, and courses efficiently with our easy-to-use interface."
+        description: "Manage students, teachers, and courses efficiently with our easy-to-use interface.",
+        id: 1
     },
     {
         title: "Secure Data",
-        description: "Your data is secure with us, ensuring privacy and protection at all times."
+        description: "Your data is secure with us, ensuring privacy and protection at all times.",
+        id: 2
     },
     {
         title: "User-Friendly Interface",
-        description: "Our platform is designed to be intuitive and easy for all users, regardless of technical skill."
+        description: "Our platform is designed to be intuitive and easy for all users, regardless of technical skill.",
+        id: 3
     }
 ];
 
 export const TESTIMONIALS = [
     {
         text: "This tool has revolutionized the way we manage our school. Highly recommend!",
-        author: "Alex Smith, Principal"
+        author: "Alex Smith, Principal",
+        id: 1
     },
     {
         text: "User-friendly and effective. It has made my job so much easier!",
-        author: "Jane Doe, Teacher"
+        author: "Jane Doe, Teacher",
+        id: 2
     },
     {
         text: "I love how organized everything is. A must-have for any school!",
-        author: "Mark Johnson, Parent"
+        author: "Mark Johnson, Parent",
+        id: 3
     }
 ];
 

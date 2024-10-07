@@ -25,8 +25,8 @@ const MainPage = () => {
                     Why Choose Us?
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
-                    {FEATURES.map((feature, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                    {FEATURES.map((feature) => (
+                        <Grid item xs={12} sm={6} md={4} key={feature.id}>
                             <Box sx={{ padding: 2, borderRadius: 2, boxShadow: 3 }}>
                                 <Typography variant="h6" gutterBottom>
                                     {feature.title}
@@ -46,7 +46,7 @@ const MainPage = () => {
                 </Typography>
                 <Grid container spacing={4} justifyContent="center">
                     {TESTIMONIALS.map((testimonial, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={testimonial.id}>
                             <Box sx={{ padding: 3, borderRadius: 2, boxShadow: 3 }}>
                                 <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
                                     "{testimonial.text}"
