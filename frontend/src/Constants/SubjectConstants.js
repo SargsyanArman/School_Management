@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_BASE_URL } from './GeneralConstants';
 // Table header names
 export const SUBJECT_HEADERS = ['Name', 'Actions'];
 
@@ -27,7 +28,7 @@ export const handleAddClose = (setOpenAddDialog) => () => {
 // Deletes a subject by its ID and updates the subject list
 export const handleDelete = (subjects, setSubjects) => async (subjectId) => {
     try {
-        await axios.delete(`http://localhost:8081/subjects/${subjectId}`);
+        await axios.delete(`${API_BASE_URL}subjects/${subjectId}`);
         setSubjects(subjects.filter(subject => subject.id !== subjectId));
     } catch (err) {
         console.error('Error deleting subject:', err);
@@ -36,7 +37,7 @@ export const handleDelete = (subjects, setSubjects) => async (subjectId) => {
 
 // Fetches updated subjects list after a successful addition
 export const handleAddSubjectSuccess = async (setSubjects) => {
-    const response = await axios.get('http://localhost:8081/subjects');
+    const response = await axios.get(`${API_BASE_URL}subjects`);
     setSubjects(response.data);
 };
 
@@ -57,11 +58,11 @@ export const handleEditSave = async (selectedSubject, setSubjects, handleEditClo
     if (!selectedSubject) return;
 
     try {
-        await axios.put(`http://localhost:8081/subjects/${selectedSubject.id}`, {
+        await axios.put(`${API_BASE_URL}subjects/${selectedSubject.id}`, {
             name: selectedSubject.name,
         });
 
-        const response = await axios.get('http://localhost:8081/subjects');
+        const response = await axios.get(`${API_BASE_URL}subjects`);
         setSubjects(response.data);
         handleEditClose();
     } catch (err) {

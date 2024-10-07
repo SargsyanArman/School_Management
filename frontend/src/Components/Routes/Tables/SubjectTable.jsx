@@ -18,7 +18,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => STYLED_TABLE_CELL(theme
 const SubjectTable = ({ subjects, handleAddOpen, handleEditOpen, handleDelete }) => {
     return (
         <>
-            <Button variant="contained" color="primary" onClick={handleAddOpen} style={{ position: 'absolute', top: '131px', left: '410px' }}>
+            <Button variant="contained" color="primary" onClick={handleAddOpen} style={{ position: 'absolute', top: '130px', left: '410px' }}>
                 +
             </Button>
             <TableContainer component={Paper} sx={{ width: '700px', margin: 'auto', mt: 5 }}>
@@ -26,7 +26,7 @@ const SubjectTable = ({ subjects, handleAddOpen, handleEditOpen, handleDelete })
                     <TableHead>
                         <TableRow>
                             {SUBJECT_HEADERS.map((header, index) => (
-                                <StyledTableCell key={index}>{header}</StyledTableCell>
+                                <StyledTableCell key={header + index}>{header}</StyledTableCell>
                             ))}
                         </TableRow>
                     </TableHead>
