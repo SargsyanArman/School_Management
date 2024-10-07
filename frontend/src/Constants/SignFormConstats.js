@@ -17,7 +17,6 @@ export const handleLogout = (setUser) => {
 // Admin can make login by this function
 export const handleLoginSubmit = async (event, email, password, dispatch, navigate) => {
     event.preventDefault();
-    console.log('Submitting login with', { email, password });
     try {
         const res = await axios.post(`${API_BASE_URL}admins`, { email, password });
         console.log('Response:', res.data);
