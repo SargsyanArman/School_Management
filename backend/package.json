@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "school-management-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend of School Management",
   "main": "index.js",
   "type": "module",
   "scripts": {
