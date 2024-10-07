@@ -1,4 +1,3 @@
-// src/store/userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
@@ -7,11 +6,11 @@ const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             const user = action.payload;
-            sessionStorage.setItem('user', JSON.stringify(user)); // Сохраняем пользователя в sessionStorage
+            sessionStorage.setItem('user', JSON.stringify(user));
             return user;
         },
         clearUser: () => {
-            sessionStorage.removeItem('user'); // Удаляем пользователя из sessionStorage
+            sessionStorage.removeItem('user');
             return null;
         },
     },
