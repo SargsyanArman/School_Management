@@ -29,8 +29,13 @@ const Pupils = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/pupils`);
-                setUsers(response.data);
+                const response = await axios.get(`${API_BASE_URL}pupils`);
+                const cleanedUsers = response.data.map(user => {
+                    const uniqueSubjects = Array.from(new Set(user.all_subjects.split(',').map(subject => subject.trim())));
+                    return { ...user, all_subjects: uniqueSubjects.join(', ') };
+                });
+
+                setUsers(cleanedUsers);
                 setLoading(false);
             } catch (err) {
                 setError('Error fetching users');
@@ -46,7 +51,7 @@ const Pupils = () => {
 
     return (
         <>
-            {user ?
+            {user ? (
                 <Container maxWidth="lg" sx={{ my: 4 }}>
                     <Typography variant="h4" gutterBottom align="center">Pupils</Typography>
                     <Button variant="contained" color="primary" onClick={handleAddOpen} sx={{ my: 1 }}> + </Button>
@@ -54,8 +59,9 @@ const Pupils = () => {
                     <AddPupil open={openAddDialog} handleClose={handleAddClose} onSuccess={() => handleAddSubjectSuccess(setUsers)} />
                     <PupilEdit open={open} onClose={handleEditCloseWrapper} selectedUser={selectedUser} setSelectedUser={setSelectedUser} onSave={handleEditSaveWrapper} />
                 </Container>
-                : <UnauthorizedPage />
-            }
+            ) : (
+                <UnauthorizedPage />
+            )}
         </>
     );
 };
