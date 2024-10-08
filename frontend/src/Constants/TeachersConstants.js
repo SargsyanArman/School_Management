@@ -40,10 +40,20 @@ export const fetchSubjects = async (setSubjects) => {
 };
 
 // Updates a user and closes the modal after success
-export const handleEditSave = async (selectedUser, fetchUsers, handleEditClose) => {
+export const handleEditSave = async (selectedUser, fetchUsers, handleEditClose, showSnackbar) => {
     if (!selectedUser) return;
-
     try {
+        const { data: subjects } = await axios.get(`${API_BASE_URL}subjects`);
+
+        const userSubjectsArray = selectedUser.all_subjects.split(',').map(subject => subject.trim().toLowerCase());
+
+        const selectedSubject = subjects.find(subject => subject.id === selectedUser.subjects)?.name.toLowerCase();
+
+        if (userSubjectsArray.includes(selectedSubject)) {
+            showSnackbar('Subject have been already added.');
+            return;
+        }
+
         await axios.put(`${API_BASE_URL}teachers/${selectedUser.teacher_id}`, {
             name: selectedUser.teachers_name,
             subjectId: selectedUser.subjects,
@@ -52,9 +62,12 @@ export const handleEditSave = async (selectedUser, fetchUsers, handleEditClose) 
         fetchUsers();
         handleEditClose();
     } catch (err) {
-        console.error('Error updating user:', err);
+        console.error('Error updating user:', err.message || err);
+        showSnackbar('Error updating user: ' + (err.message || 'Unknown error'));
     }
 };
+
+
 
 // Deletes a user by ID and updates the user list
 export const handleDelete = async (userId, users, setUsers) => {

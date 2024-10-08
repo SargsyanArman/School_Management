@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, CircularProgress } from '@mui/material';
+import { Container, Typography, CircularProgress, Snackbar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import AddTeacher from './Adding/AddTeacher';
 import TeachersEdit from './Tools/TeachersEdit';
@@ -16,6 +16,8 @@ const Teachers = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [addTeacherOpen, setAddTeacherOpen] = useState(false);
     const [subjects, setSubjects] = useState([]);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     useEffect(() => {
         fetchUsers(setUsers, setLoading, setError);
@@ -45,23 +47,34 @@ const Teachers = () => {
         setAddTeacherOpen(false);
     };
 
+    // Snackbar handlers
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+
+    const showSnackbar = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
     if (loading) return <CircularProgress color="primary" />;
     if (error) return <Typography color="error">{error}</Typography>;
 
     return (
         <>
-            {user ?
+            {user ? (
                 <Container maxWidth="lg" sx={{ my: 4 }}>
                     <Typography variant="h4" gutterBottom align="center">Teachers</Typography>
                     <TeacherTable users={users} handleEditOpen={handleEditOpen} handleAddTeacherOpen={handleAddTeacherOpen}
                         handleDelete={(teacherId) => handleDelete(teacherId, users, setUsers)} />
-                    <TeachersEdit open={open} handleEditClose={handleEditClose} selectedUser={selectedUser} setSelectedUser={setSelectedUser} subjects={subjects}
-                        handleEditSave={() => handleEditSave(selectedUser, fetchUsers.bind(null, setUsers, setLoading, setError), handleEditClose)} />
+                    <TeachersEdit open={open} handleEditClose={handleEditClose} selectedUser={selectedUser} setSelectedUser={setSelectedUser} subjects={subjects} handleEditSave={() => handleEditSave(selectedUser, fetchUsers.bind(null, setUsers, setLoading, setError), handleEditClose, showSnackbar)} />
                     <AddTeacher open={addTeacherOpen} handleClose={handleAddTeacherClose} onSuccess={handleAddTeacherSuccess} />
                 </Container>
-                :
+            ) : (
                 <UnauthorizedPage />
-            }
+            )}
+
+            <Snackbar open={snackbarOpen} onClose={handleSnackbarClose} message={snackbarMessage} autoHideDuration={6000} />
         </>
     );
 };
