@@ -31,7 +31,7 @@ export const TABLE_HEADERS = [
 
 // Function to handle successful addition of subjects and re-fetch pupil data
 export const handleAddSubjectSuccess = async (setUsers) => {
-    const response = await axios.get(`${API_BASE_URL}/pupils`);
+    const response = await axios.get(`${API_BASE_URL}pupils`);
     setUsers(response.data);
 };
 
@@ -55,11 +55,11 @@ export const handleEditClose = (setOpen, setSelectedUser) => {
 export const handleEditSave = async (selectedUser, setUsers, handleEditClose) => {
     if (!selectedUser) return;
     try {
-        await axios.put(`${API_BASE_URL}/pupils/${selectedUser.pupils_id}`, {
+        await axios.put(`${API_BASE_URL}pupils/${selectedUser.pupils_id}`, {
             pupils_name: selectedUser.pupils_name,
             grades_id: selectedUser.grades_id,
         });
-        const response = await axios.get(`${API_BASE_URL}/pupils`);
+        const response = await axios.get(`${API_BASE_URL}pupils`);
         setUsers(response.data);
         handleEditClose();
     } catch (err) {
@@ -88,7 +88,7 @@ export const handleChange = (values, setValues) => (event) => {
 // Function to handle form submission for creating a new pupil
 export const handleSubmit = async (values, setValues, handleClose, onSuccess) => {
     try {
-        const res = await axios.post(`${API_BASE_URL}/pupils`, values);
+        const res = await axios.post(`${API_BASE_URL}pupils`, values);
         if (res.data.status === "Success") {
             setValues({ name: '', grade_id: 1 });
             handleClose();
