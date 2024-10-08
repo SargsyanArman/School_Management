@@ -16,9 +16,12 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export const fetchUsers = async (setUsers, setLoading, setError) => {
     try {
         const response = await axios.get(`${API_BASE_URL}teachers`);
-        console.log(response.data);
+        const cleanedUsers = response.data.map(user => {
+            const uniqueTeachers = Array.from(new Set(user.all_subjects.split(',').map(teacher => teacher.trim())));
+            return { ...user, all_subjects: uniqueTeachers.join(', ') };
+        });
 
-        setUsers(response.data);
+        setUsers(cleanedUsers);
         setLoading(false);
     } catch (err) {
         setError('Error fetching users');
