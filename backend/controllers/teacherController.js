@@ -43,16 +43,16 @@ export const createTeacher = (req, res) => {
 
 export const updateTeacher = (req, res) => {
     const { name, subjectId } = req.body;
-    const userId = req.params.id;
+    const teacherId = req.params.id;
 
     const sql = 'UPDATE teachers SET name = ? WHERE id = ?';
-    const values = [name, userId];
+    const values = [name, teacherId];
 
     db.query(sql, values, (err) => {
         if (err) return res.json(err);
 
         const sqlInsertTeacherSubject = 'INSERT INTO teachers_subjects (teacher_id, subject_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE subject_id = ?';
-        const subjectValues = [userId, subjectId, subjectId];
+        const subjectValues = [teacherId, subjectId, subjectId];
 
         db.query(sqlInsertTeacherSubject, subjectValues, (err) => {
             if (err) return res.json(err);
@@ -62,10 +62,10 @@ export const updateTeacher = (req, res) => {
 };
 
 export const deleteTeacher = (req, res) => {
-    const userId = req.params.id;
+    const teacherId = req.params.id;
     const sql = 'DELETE FROM teachers WHERE id = ?';
 
-    db.query(sql, [userId], (err) => {
+    db.query(sql, [teacherId], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });
