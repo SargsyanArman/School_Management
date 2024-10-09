@@ -23,7 +23,7 @@ export const getPupils = (req, res) => {
 export const addPupil = (req, res) => {
     const { name, grade_id } = req.body;
     const sql = 'INSERT INTO pupils (`name`, `grade_id`) VALUES (?, ?)';
-    db.query(sql, [name, grade_id], (err, data) => {
+    db.query(sql, [name, grade_id], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });
@@ -33,7 +33,7 @@ export const updatePupil = (req, res) => {
     const { pupils_name, grades_id } = req.body;
     const userId = req.params.id;
     const sql = 'UPDATE pupils SET name = ?, grade_id = ? WHERE id = ?';
-    db.query(sql, [pupils_name, grades_id, userId], (err, result) => {
+    db.query(sql, [pupils_name, grades_id, userId], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });
@@ -42,7 +42,7 @@ export const updatePupil = (req, res) => {
 export const deletePupil = (req, res) => {
     const userId = req.params.id;
     const sql = 'DELETE FROM pupils WHERE id = ?';
-    db.query(sql, [userId], (err, result) => {
+    db.query(sql, [userId], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });

@@ -11,7 +11,7 @@ export const getSubjects = (req, res) => {
 export const addSubject = (req, res) => {
     const { name } = req.body;
     const sql = 'INSERT INTO subjects (`name`) VALUES (?)';
-    db.query(sql, [name], (err, data) => {
+    db.query(sql, [name], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });
@@ -19,18 +19,18 @@ export const addSubject = (req, res) => {
 
 export const updateSubject = (req, res) => {
     const { name } = req.body;
-    const userId = req.params.id;
+    const subjectId = req.params.id;
     const sql = 'UPDATE subjects SET name = ? WHERE id = ?';
-    db.query(sql, [name, userId], (err, result) => {
+    db.query(sql, [name, subjectId], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });
 };
 
 export const deleteSubject = (req, res) => {
-    const userId = req.params.id;
+    const subjectId = req.params.id;
     const sql = 'DELETE FROM subjects WHERE id = ?';
-    db.query(sql, [userId], (err, result) => {
+    db.query(sql, [subjectId], (err) => {
         if (err) return res.json(err);
         return res.json({ status: "Success" });
     });

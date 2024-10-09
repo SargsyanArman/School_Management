@@ -67,7 +67,8 @@ const Teachers = () => {
                     <Typography variant="h4" gutterBottom align="center">Teachers</Typography>
                     <TeacherTable users={users} handleEditOpen={handleEditOpen} handleAddTeacherOpen={handleAddTeacherOpen}
                         handleDelete={(teacherId) => handleDelete(teacherId, users, setUsers)} />
-                    <TeachersEdit open={open} handleEditClose={handleEditClose} selectedUser={selectedUser} setSelectedUser={setSelectedUser} subjects={subjects} handleEditSave={() => handleEditSave(selectedUser, fetchUsers.bind(null, setUsers, setLoading, setError), handleEditClose, showSnackbar)} />
+                    <TeachersEdit open={open} handleEditClose={handleEditClose} selectedUser={selectedUser} setSelectedUser={setSelectedUser} subjects={subjects}
+                        handleEditSave={() => handleEditSave(selectedUser, fetchUsers.bind(null, setUsers, setLoading, setError), handleEditClose, showSnackbar)} />
                     <AddTeacher open={addTeacherOpen} handleClose={handleAddTeacherClose} onSuccess={handleAddTeacherSuccess} />
                 </Container>
             ) : (
