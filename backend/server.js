@@ -1,25 +1,13 @@
-// TODO: Add password hashing
-// TODO: SQL injection
-
 import express from 'express';
-import cors from 'cors';
-import adminsRoutes from './routes/adminRoutes.js';
-import pupilsRoutes from './routes/pupilRoutes.js';
-import subjectsRoutes from './routes/subjectRoutes.js';
-import teachersRoutes from './routes/teacherRoutes.js';
+import { graphqlHTTP } from 'express-graphql';
+import pupilSchema from './graphql/pupilSchema.js';
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.use('/graphql', graphqlHTTP({
+    schema: pupilSchema,
+    graphiql: true,  // Enable the GraphiQL interface for testing queries
+}));
 
-app.use('/admins', adminsRoutes);
-app.use('/subjects', subjectsRoutes);
-app.use('/pupils', pupilsRoutes);
-app.use('/teachers', teachersRoutes);
-
-const PORT = 8081;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 8081;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
