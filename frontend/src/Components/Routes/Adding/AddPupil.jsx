@@ -28,7 +28,7 @@ const AddPupil = ({ open, handleClose, onSuccess }) => {
                             value={values.name}
                             onChange={onChange}
                             fullWidth
-                            margin="normal"
+                            margin="dense"
                             required
                         />
                         <Select
@@ -37,7 +37,7 @@ const AddPupil = ({ open, handleClose, onSuccess }) => {
                             value={values.grade_id}
                             onChange={onChange}
                             fullWidth
-                            margin="normal"
+                            margin="dense"
                             required
                         >
                             {Array.from({ length: 12 }, (_, index) => (
